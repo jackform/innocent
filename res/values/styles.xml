@@ -1,0 +1,34 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
+        <!--
+            Theme customizations available in newer API levels can go in
+            res/values-vXX/styles.xml, while customizations related to
+            backward-compatibility can go here.
+        -->
+    </style>
+	<style name="AnimationActivity">  
+    	<item name="android:activityOpenEnterAnimation">@anim/in_from_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/out_to_left</item>
+        <item name="android:activityCloseEnterAnimation">@anim/in_from_left</item>
+        <item name="android:activityCloseExitAnimation">@anim/out_to_right</item> 
+       	<item name="android:taskToFrontEnterAnimation">@anim/in_from_right</item>  
+    	<item name="android:taskToFrontExitAnimation">@anim/out_to_left</item>  
+    	<item name="android:taskToBackEnterAnimation">@anim/in_from_left</item>  
+    	<item name="android:taskToBackExitAnimation">@anim/out_to_right</item>  
+	</style> 
+    <!-- Application theme. -->
+    
+    <style name="AppTheme" parent="AppBaseTheme">
+        <item name="android:windowAnimationStyle">@style/AnimationActivity</item> 
+    </style>
+	<style name="NoActionBarActivity"> 
+	    <item name="android:windowNoTitle" >true </item> 
+	    <item name="android:windowFullscreen">true</item>
+	</style>
+	
+</resources>
