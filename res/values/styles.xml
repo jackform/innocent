@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -29,6 +29,17 @@
 	<style name="NoActionBarActivity"> 
 	    <item name="android:windowNoTitle" >true </item> 
 	    <item name="android:windowFullscreen">true</item>
+	</style>
+	<style name="tab_button">
+	    <item name="android:layout_width">match_parent</item>
+	    <item name="android:layout_height">wrap_content</item>  
+    	<item name="android:layout_weight">1</item>  
+    	<item name="android:gravity">center</item>  
+    	<item name="android:textSize">10sp</item>  
+    	<item name="android:paddingTop">8dip</item>  
+    	<item name="android:paddingBottom">4dip</item>  
+    	<item name="android:textColor">#ffffffff</item>  
+    	<item name="android:button">@null</item>  
 	</style>
 	
 </resources>
