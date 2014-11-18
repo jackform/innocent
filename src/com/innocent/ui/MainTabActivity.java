@@ -3,20 +3,17 @@ package com.innocent.ui;
 import com.innocent.R;
 import com.innocent.fragment.FragmentFactory;
 
-import android.hardware.Camera.Face;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.widget.RadioGroup;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
 public class MainTabActivity extends FragmentActivity {
 	private RadioGroup underLineTab;
 	private FragmentManager	fragmentManager;
-	private Fragment[] fragments = new Fragment[FragmentFactory.NUM_OF_TAB];
 	private Fragment oldFragment = null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,13 +25,12 @@ public class MainTabActivity extends FragmentActivity {
 		underLineTab = (RadioGroup)findViewById(R.id.tab_view);
 		underLineTab.check(R.id.friendlist_tab);
 		underLineTab.setOnCheckedChangeListener(onTabSwitchListener);
-		
+		//display first tab fragment
 		FragmentTransaction transaction = fragmentManager.beginTransaction(); 
-		fragments[0] =  FragmentFactory.getInstanceByIndex(0);
-		transaction.replace(R.id.content_view,fragments[0]);
+		Fragment fragment = FragmentFactory.getInstanceByIndex(R.id.friendlist_tab);
+		transaction.replace(R.id.content_view,fragment,String.valueOf(R.id.friend_list));
 		transaction.commit();
-		oldFragment = fragments[0];
-		Log.v("Fragment","show first fragment");
+		oldFragment = fragment;
 	}
 	
 	
@@ -43,18 +39,16 @@ public class MainTabActivity extends FragmentActivity {
 		@Override
 		public void onCheckedChanged(RadioGroup parent, int checkedId) {
 			FragmentTransaction transaction = fragmentManager.beginTransaction();
-			int index = FragmentFactory.getIndexByCheckedId(checkedId);
-			if( -1 == index )
-				return ;
-			if( null == fragments[index] ) {
-				fragments[index] = FragmentFactory.getInstanceByIndex(index);
+			Fragment newFragment = fragmentManager.findFragmentByTag(String.valueOf(checkedId));
+			if ( null == newFragment ) {
+				newFragment = FragmentFactory.getInstanceByIndex(checkedId);
 				transaction.hide(oldFragment);
-				transaction.add(R.id.content_view,fragments[index]);
+				transaction.add(R.id.content_view, newFragment,String.valueOf(checkedId));
 			} else {
 				transaction.hide(oldFragment);
-				transaction.show(fragments[index]);
+				transaction.show(newFragment);
 			}
-			oldFragment = fragments[index];
+			oldFragment = newFragment;
 			transaction.commit();
 		}
 	};
